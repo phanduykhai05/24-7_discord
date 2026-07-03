@@ -1,0 +1,27 @@
+# Replace with your Discord Application ID
+application_id: "1361932683306995893"
+
+# Activity type: 0 = Playing, 1 = Streaming, 2 = Listening, 3 = Watching
+type: 0
+
+# Activity Details
+name: "VS Code"
+details: "Playing VS Code & Claude"
+state: "Coding with AI"
+
+# Activity Images
+largeImageKey: "claudecode-color"
+largeImageText: "Claude Code"
+smallImageKey: "vs_code"
+smallImageText: "VS Code"
+
+# Activity URL (optional, works only with certain types)
+url: "https://media.tenor.com/UEFrl-Qr4u8AAAAM/claude-claude-code.gif"
+# Activity Buttons (optional)
+buttons:
+  - name: "xem dự án"
+    url: "https://pwsdata.vn"
+
+# Activity Custom status
+custom_status: "Đang code cùng Claude"
+custom_emoji: "💻"
