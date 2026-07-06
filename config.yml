@@ -5,24 +5,25 @@ application_id: "1361932683306995893"
 type: 0
 
 # Activity Details
-name: "VS Code"
-details: "Playing VS Code & Claude"
-state: "Coding with AI"
+name: "ClaudeCode"
+details: "Coding with Claude AI 24/7"
+state: "Starting a session </> Using Fable 5"
 
 # Activity Images
 # Bạn có thể dùng TÊN asset (đã upload lên Developer Portal)
 # HOẶC dán URL ảnh trực tiếp (bắt đầu bằng http/https) — sẽ tự động xử lý qua getExternal
-largeImageKey: "https://media.tenor.com/UEFrl-Qr4u8AAAAM/claude-claude-code.gif"
-largeImageText: "Claude Code"
+largeImageKey: "https://cdn3.ldstatic.com/original/4X/6/f/3/6f34b405e13552496c3a1c13dec72be8daabcac1.gif"
+largeImageText: "Claude Code & Lofi chill"
 smallImageKey: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/IntelliJ_IDEA_Icon.svg/960px-IntelliJ_IDEA_Icon.svg.png"
 smallImageText: "IntelliJ IDEA"
 
 # Activity URL (optional, works only with certain types)
-url: "https://media.tenor.com/UEFrl-Qr4u8AAAAM/claude-claude-code.gif"
+# Để trống để tránh che button
+url: ""
 # Activity Buttons (optional)
 buttons:
-  - name: "xem dự án"
-    url: "https://pwsdata.vn"
+  - name: "Nhận dự án tại đây"
+    url: "https://pwsdata.vn/"
 
 # Activity Custom status
 custom_status: "Đang code cùng Claude"
