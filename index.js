@@ -19,26 +19,22 @@ const customStatus = new CustomStatus(client, {
   emoji: config.custom_emoji ? { name: config.custom_emoji } : undefined,
 });
 
-/**
- * Create rich presence
- */
-const rich = new RichPresence(client)
-  .setApplicationId(config.application_id)
-  .setType(config.type || 0) // 0 = Playing, 1 = Streaming, 2 = Listening, 3 = Watching
-  .setName(config.name || "My Cool Presence")
-  .setDetails(config.details || "No details set")
-  .setState(config.state || "Available")
-  .setAssetsLargeImage(config.largeImageKey || null)
-  .setAssetsLargeText(config.largeImageText || "")
-  .setAssetsSmallImage(config.smallImageKey || null)
-  .setAssetsSmallText(config.smallImageText || "")
-  .setURL(config.url || null)
-  .setStartTimestamp(new Date());
+const isUrl = (value) => typeof value === "string" && /^https?:\/\//i.test(value);
 
-// Add buttons only if defined
-if (config.buttons && Array.isArray(config.buttons)) {
-  rich.setButtons(config.buttons);
-}
+/**
+ * Resolve an image config value into a valid Rich Presence asset key.
+ * - If it's a URL, convert it through Discord's external proxy (getExternal).
+ * - Otherwise use it as-is (an Art Asset name uploaded to the Developer Portal).
+ */
+const resolveImage = async (value) => {
+  if (!isUrl(value)) return value || null;
+  const [external] = await RichPresence.getExternal(
+    client,
+    config.application_id,
+    value
+  );
+  return external.external_asset_path;
+};
 
 /**
  * When the selfbot is ready and connected to Discord,
@@ -47,6 +43,29 @@ if (config.buttons && Array.isArray(config.buttons)) {
 client.on("ready", async () => {
   console.log(`✅ ${client.user.username} is ready!`);
   try {
+    const [largeImage, smallImage] = await Promise.all([
+      resolveImage(config.largeImageKey),
+      resolveImage(config.smallImageKey),
+    ]);
+
+    const rich = new RichPresence(client)
+      .setApplicationId(config.application_id)
+      .setType(config.type || 0) // 0 = Playing, 1 = Streaming, 2 = Listening, 3 = Watching
+      .setName(config.name || "My Cool Presence")
+      .setDetails(config.details || "No details set")
+      .setState(config.state || "Available")
+      .setAssetsLargeImage(largeImage)
+      .setAssetsLargeText(config.largeImageText || "")
+      .setAssetsSmallImage(smallImage)
+      .setAssetsSmallText(config.smallImageText || "")
+      .setURL(config.url || null)
+      .setStartTimestamp(new Date());
+
+    // Add buttons only if defined
+    if (config.buttons && Array.isArray(config.buttons)) {
+      rich.setButtons(config.buttons);
+    }
+
     client.user.setPresence({
       activities: [customStatus.toJSON(), rich.toJSON()],
       status: "online", // online, idle, dnd, invisible

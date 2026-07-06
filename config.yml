@@ -10,10 +10,12 @@ details: "Playing VS Code & Claude"
 state: "Coding with AI"
 
 # Activity Images
-largeImageKey: "claudecode-color"
+# Bạn có thể dùng TÊN asset (đã upload lên Developer Portal)
+# HOẶC dán URL ảnh trực tiếp (bắt đầu bằng http/https) — sẽ tự động xử lý qua getExternal
+largeImageKey: "https://media.tenor.com/UEFrl-Qr4u8AAAAM/claude-claude-code.gif"
 largeImageText: "Claude Code"
-smallImageKey: "vs_code"
-smallImageText: "VS Code"
+smallImageKey: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/IntelliJ_IDEA_Icon.svg/960px-IntelliJ_IDEA_Icon.svg.png"
+smallImageText: "IntelliJ IDEA"
 
 # Activity URL (optional, works only with certain types)
 url: "https://media.tenor.com/UEFrl-Qr4u8AAAAM/claude-claude-code.gif"
