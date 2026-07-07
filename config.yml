@@ -17,6 +17,12 @@ largeImageText: "Claude Code & Lofi chill"
 smallImageKey: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/IntelliJ_IDEA_Icon.svg/960px-IntelliJ_IDEA_Icon.svg.png"
 smallImageText: "IntelliJ IDEA"
 
+# Mốc thời gian bắt đầu (đồng hồ đếm lên "elapsed" trên presence).
+# CỐ ĐỊNH mốc này → đồng hồ đếm liên tục mãi, không reset mỗi lần refresh
+# hay mỗi lần job GitHub khởi động lại. Định dạng ISO (UTC).
+# Để trống nếu muốn tính từ lúc process bắt đầu (sẽ reset mỗi lần restart).
+start_timestamp: "2026-07-07T00:00:00Z"
+
 # Activity URL (optional, works only with certain types)
 # Để trống để tránh che button
 url: ""

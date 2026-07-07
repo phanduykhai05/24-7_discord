@@ -12,6 +12,15 @@ dotenv.config();
 const client = new Client();
 
 /**
+ * Fixed start timestamp for the "elapsed" timer. Resolved ONCE so refreshes
+ * and job restarts don't reset the clock. Set `start_timestamp` in config.yml
+ * to a fixed date to keep it counting up continuously forever.
+ */
+const START_TIMESTAMP = config.start_timestamp
+  ? new Date(config.start_timestamp)
+  : new Date();
+
+/**
  * Create custom status
  */
 const customStatus = new CustomStatus(client, {
@@ -58,7 +67,7 @@ const applyPresence = async () => {
     .setAssetsSmallImage(smallImage)
     .setAssetsSmallText(config.smallImageText || "")
     .setURL(config.url || null)
-    .setStartTimestamp(new Date());
+    .setStartTimestamp(START_TIMESTAMP);
 
   // Add buttons only if defined
   if (config.buttons && Array.isArray(config.buttons)) {
