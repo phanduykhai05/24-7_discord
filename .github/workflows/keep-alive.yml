@@ -2,18 +2,21 @@ name: "24/7 Rich Presence"
 
 on:
   schedule:
-    # 4 khung giờ × 6 tiếng = 24/7 không gián đoạn
-    # Mỗi job chạy 360 phút (max GitHub free tier)
-    - cron: "0 0 * * *"   # 00:00 UTC → 06:00 UTC
-    - cron: "0 6 * * *"   # 06:00 UTC → 12:00 UTC
-    - cron: "0 12 * * *"  # 12:00 UTC → 18:00 UTC
-    - cron: "0 18 * * *"  # 18:00 UTC → 00:00 UTC
+    # Chạy MỖI 4 TIẾNG, mỗi job kéo dài 5 tiếng (300 phút).
+    # Overlap ~1 tiếng để bù độ trễ/skip thường gặp của GitHub cron
+    # → không còn khoảng trống 24/7.
+    - cron: "0 0 * * *"    # 00:00 UTC
+    - cron: "0 4 * * *"    # 04:00 UTC
+    - cron: "0 8 * * *"    # 08:00 UTC
+    - cron: "0 12 * * *"   # 12:00 UTC
+    - cron: "0 16 * * *"   # 16:00 UTC
+    - cron: "0 20 * * *"   # 20:00 UTC
   workflow_dispatch:
 
 jobs:
   rich-presence:
     runs-on: ubuntu-latest
-    timeout-minutes: 360 # Max 6 giờ - GitHub free tier
+    timeout-minutes: 300 # 5 giờ (< max 6h), tạo overlap với job kế tiếp
 
     steps:
       - name: 📥 Checkout code
